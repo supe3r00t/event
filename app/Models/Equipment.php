@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+    use Illuminate\Database\Eloquent\Builder;
+
 
 class Equipment extends Model
 {
@@ -36,4 +38,11 @@ class Equipment extends Model
             }
         });
     }
+
+
+public function scopePublished(Builder $query): Builder
+{
+    return $query->where('is_published', true);
+}
+
 }
