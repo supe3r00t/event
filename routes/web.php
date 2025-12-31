@@ -3,10 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+use App\Models\Equipment;
+
 
 Route::get('/', \App\Livewire\Public\Home::class)->name('home');
 Route::get('/catalog', \App\Livewire\Public\Catalog::class)->name('catalog');
-Route::get('/equipment/{equipment:slug}', \App\Livewire\Public\EquipmentShow::class)->name('equipment.show');
+
+Route::get('/equipment/{equipment:slug}', function (Equipment $equipment) {
+    return view('public.equipment-show', compact('equipment'));
+})->name('equipment.show');
 Route::get('/quote-request', \App\Livewire\Public\QuoteRequest::class)->name('quote.request');
 
 Route::view('dashboard', 'dashboard')
